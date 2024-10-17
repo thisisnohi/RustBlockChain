@@ -1,5 +1,3 @@
-mod test;
-
 use chrono::prelude::*;
 use std::fmt;
 use std::fmt::{Display, Formatter};
