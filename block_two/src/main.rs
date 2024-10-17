@@ -1,5 +1,3 @@
-mod test;
-
 use chrono::prelude::*;
 use std::fmt;
 use std::fmt::{Display, Formatter};
@@ -81,31 +79,5 @@ impl BlockChain {
 }
 
 fn main() {
-    println!("Hello, world!");
-    let mut block = Block {
-        timestamp: Default::default(),
-        data: "data".to_string(),
-        prev_block_hash: "preblock".to_string(),
-        hash: "hash".to_string(),
-    };
-    println!("{}", block);
-    println!("to_string:{}", block.to_string());
-
-    // 实例化
-    block = Block::init("aaa".to_string(), "bbb".to_string());
-    println!("{} hash:{}", block, block.hash);
-
-    // 区块链
-    println!("===> block chain");
-    let mut blockChain = BlockChain::init();
-    blockChain.add_block("First block".to_string());
-    blockChain.add_block("Second block".to_string());
-    blockChain.add_block("Third block".to_string());
-    blockChain.add_block("Fouth block".to_string());
-    println!("===> chain:{:?}", blockChain);
-    println!("");
-
-    for block in blockChain.blocks {
-        println!("{}", block)
-    }
+    println!("hello world")
 }
