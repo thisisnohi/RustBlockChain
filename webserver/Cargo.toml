@@ -1,0 +1,28 @@
+[package]
+name = "webservice"
+version = "0.1.0"
+edition = "2021"
+default-run = "block-chain"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+sha256 = "1.5.0"
+actix-cors = "0.7.0"
+actix-web = "4.5.1"
+actix-rt = "2.9.0"
+serde = { version = "1.0.132", features = ["derive"] }
+chrono = { version = "0.4.19", features = ["serde"] }
+dotenv = "0.15.0"
+openssl = { version = "0.10.38", features = ["vendored"] }
+sqlx = { version = "0.8.2", default-features = false, features = [
+    "postgres",
+    "runtime-tokio-rustls",
+    "macros",
+    "chrono",
+] }
+log = "0.4.22"
+env_logger = "0.11.5"
+
+[[bin]]
+name = "block-chain"

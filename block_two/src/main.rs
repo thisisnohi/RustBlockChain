@@ -13,6 +13,6 @@ fn main() {
 
     println!(
         "===> chain is valid:{}",
-        BlockChain::is_valid_chain(chain.blocks)
+        BlockChain::is_valid_chain(&chain.blocks)
     );
 }

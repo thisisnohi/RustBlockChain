@@ -10,4 +10,4 @@ name = "block_two"
 
 [dependencies]
 chrono = "0.4.2"
-sha256="1.5.0"
+sha256 = "1.5.0"

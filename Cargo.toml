@@ -1,6 +1,6 @@
 [workspace]
 members = [
     "block_one",
-    "block_two",
+    "block_two", "webserver",
 ]
 
