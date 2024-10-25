@@ -1,0 +1,10 @@
+### GET request to example server
+GET http://127.0.0.1:3000/blockchain/
+
+###
+PUT http://127.0.0.1:3000/blockchain/
+Content-Type: application/json
+
+{
+  "data": "some data"
+}

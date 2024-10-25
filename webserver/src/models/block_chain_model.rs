@@ -1,4 +1,5 @@
 use crate::models::block_model::Block;
+use log::info;
 use serde::Serialize;
 
 #[derive(Debug, Serialize)]
@@ -33,6 +34,10 @@ impl BlockChain {
             data,
             self.get_last_hash(),
         ));
+        info!(
+            "===> add_block: {}",
+            self.blocks.last().unwrap().to_string()
+        );
     }
 
     // 判断是否合格的区块

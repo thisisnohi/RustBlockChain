@@ -24,9 +24,10 @@ pub async fn add_block_data(
     form: web::Json<BlockForm>,
     app_state: web::Data<AppState>,
 ) -> Result<HttpResponse, MyError> {
+    info!("add_block_data...");
     // 获取最新的数据
-    let mut chain = &app_state.block_chain.lock().unwrap();
-    &chain.add_block(form.data.clone());
-
-    Ok(HttpResponse::Ok().json(&app_state.block_chain))
+    let mut chain = app_state.block_chain.lock().unwrap();
+    chain.add_block(form.data.clone());
+    info!("chain.add_block...");
+    Ok(HttpResponse::Ok().json(&chain.blocks))
 }
