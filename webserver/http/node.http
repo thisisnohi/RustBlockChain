@@ -1,0 +1,10 @@
+### 获取所有节点
+GET http://{{local}}/nodes
+
+### 连接新的节点
+PUT http://{{local}}/nodes
+content-type: application/json
+
+{
+  "node": "http://127.0.0.1:4000"
+}
