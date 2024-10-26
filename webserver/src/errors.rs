@@ -1,6 +1,7 @@
 use core::fmt;
 
 use actix_web::{error, http::StatusCode, HttpResponse};
+use log::{error, info};
 use serde::Serialize;
 use sqlx::error::Error as SQLxError;
 
@@ -10,6 +11,8 @@ pub enum MyError {
     ActixError(String),
     NotFound(String),
     LoadError(String),
+    NodeExist(String),
+    NodeError(String),
 }
 
 #[derive(Debug, Serialize)]
@@ -21,15 +24,19 @@ impl MyError {
     fn error_message(&self) -> String {
         match self {
             MyError::DBError(msg) => {
-                println!("Database error occurred: {:?}", msg);
+                error!("Database error occurred: {:?}", msg);
                 "Database error".into()
             }
             MyError::ActixError(msg) => {
-                println!("Server error occurred: {:?}", msg);
+                error!("Server error occurred: {:?}", msg);
                 "Internal server error".into()
             }
             MyError::NotFound(msg) => {
-                println!("Not found error occurred: {:?}", msg);
+                error!("Not found error occurred: {:?}", msg);
+                msg.into()
+            }
+            MyError::NodeExist(msg) => {
+                error!("节点已经存在: {:?}", msg);
                 msg.into()
             }
             _ => "Something server error".into(),

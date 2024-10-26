@@ -1,7 +1,7 @@
-### GET request to example server
+### 获取链上的数据
 GET http://127.0.0.1:3000/blockchain/
 
-###
+### 向链中添加数据
 PUT http://127.0.0.1:3000/blockchain/
 Content-Type: application/json
 

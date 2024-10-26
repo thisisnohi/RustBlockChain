@@ -58,13 +58,14 @@ async fn main() -> io::Result<()> {
     // let db_pool: sqlx::Pool<sqlx::Postgres> =
     //     PgPoolOptions::new().connect(&database_url).await.unwrap();
 
-    // 应用共享数据
+    // 启用共享数据
     let shared_data = web::Data::new(AppState {
         health_check_response: "I'm OK".to_string(),
         visit_count: Mutex::new(0),
         // courses: Mutex::new(vec![]),
         // db: db_pool,
         block_chain: Mutex::from(load_block_chain().unwrap()),
+        node_list: Mutex::new(vec![]),
     });
 
     let app = move || {
@@ -91,6 +92,7 @@ async fn main() -> io::Result<()> {
             .configure(general_routes)
             // 2.业务路由
             .configure(block_chain_routes)
+            .configure(node_routes)
             .wrap(cors)
     };
     info!("===> 应用启动 ====");

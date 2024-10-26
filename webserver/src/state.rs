@@ -6,5 +6,8 @@ pub struct AppState {
     pub visit_count: Mutex<u32>,
     // pub courses: Mutex<Vec<Course>>
     // pub db: PgPool,
+    // 区块链
     pub block_chain: Mutex<BlockChain>,
+    // 节点列表
+    pub node_list: Mutex<Vec<String>>,
 }
