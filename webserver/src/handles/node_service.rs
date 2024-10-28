@@ -2,10 +2,11 @@ use crate::db_access::block_chain_db::all_blocks;
 use crate::errors::MyError;
 use crate::models::block_chain_model::BlockChain;
 use crate::models::block_form::BlockForm;
-use crate::models::node_info::NodeForm;
+use crate::models::node_info::{NodeForm, NodeHealth};
 use crate::state::AppState;
 use actix_web::{web, HttpResponse};
 use log::info;
+use std::collections::HashMap;
 
 /// 加载本地区块链
 // 从本地数据获取，如果没有，则创建一个新的
@@ -24,6 +25,14 @@ pub async fn add_node(
 
     // 测试节点是否存在
     let url = node_form.node.clone();
+    let resp = reqwest::get(format!("{}/health", &url))
+        .await
+        .unwrap()
+        .json::<NodeHealth>()
+        .await
+        .unwrap();
+
+    info!("{:#?}", resp);
 
     // url 是否在列表中
     let mut node_list = app_state.node_list.lock().unwrap();

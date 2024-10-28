@@ -8,6 +8,8 @@ pub struct Block {
     pub(crate) index: u32,
     pub(crate) hash: String,
     pub(crate) prev_block_hash: String,
+    pub difficulty: u32,
+    pub nonce: u32,
     timestamp: DateTime<Utc>,
     data: String,
 }
@@ -18,6 +20,8 @@ impl Block {
         let mut block = Block {
             index,
             prev_block_hash,
+            difficulty: 0,
+            nonce: 0,
             timestamp: if index == 0 {
                 // 创世区块时间固定
                 Utc.with_ymd_and_hms(1986, 4, 3, 14, 0, 0).unwrap()
