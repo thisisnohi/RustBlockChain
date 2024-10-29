@@ -14,6 +14,7 @@ pub fn block_chain_routes(cfg: &mut web::ServiceConfig) {
         web::scope("/blockchain")
             // 获取所有块
             .route("/", web::get().to(get_all_blocks))
+            .route("/last-block", web::get().to(get_all_blocks))
             // 添加新的块
             .route("/", web::put().to(add_block_data))
             .route("/{data}", web::put().to(add_block_data)),

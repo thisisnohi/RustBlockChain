@@ -19,6 +19,11 @@ pub async fn get_all_blocks(app_state: web::Data<AppState>) -> Result<HttpRespon
     Ok(HttpResponse::Ok().json(&app_state.block_chain))
 }
 
+/// 获取最后一个块
+pub async fn last_block(app_state: web::Data<AppState>) -> Result<HttpResponse, MyError> {
+    Ok(HttpResponse::Ok().json(&app_state.block_chain.lock().unwrap().blocks.last().unwrap()))
+}
+
 /// 添加新的块，并返回所有块
 pub async fn add_block_data(
     form: web::Json<BlockForm>,

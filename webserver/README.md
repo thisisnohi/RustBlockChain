@@ -4,6 +4,23 @@
 
 ## 功能
 
+### 区块功能
+
+> /blockchain
+
+* 新增区块：  `PUT` `/blockchain/`
+* 获取最新区块 `GET` `/blockchain/last-block`
+* 列出所有区块 `GET` `/blockchain/`
+
+### 节点功能
+
+> nodes
+
+* 新增节点
+* 列出所有节点
+* 广播所有节点
+* 其他节点广播新增区块
+
 ## 测试
 
 * 初始化
