@@ -24,6 +24,7 @@ sqlx = { version = "0.8.2", default-features = false, features = [
 log = "0.4.22"
 env_logger = "0.11.5"
 reqwest = { version = "0.12.8", features = ["json"] }
+lazy_static = "1.5.0"
 
 [[bin]]
 name = "block-chain"

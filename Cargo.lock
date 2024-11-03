@@ -2692,6 +2692,7 @@ dependencies = [
  "chrono",
  "dotenv",
  "env_logger",
+ "lazy_static",
  "log",
  "openssl",
  "reqwest",

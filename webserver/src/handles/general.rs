@@ -1,8 +1,11 @@
 use crate::models::node_info::NodeHealth;
 use crate::state::AppState;
+use crate::GLOBAL_APP_STATE;
 use actix_web::{web, HttpResponse};
 
-pub async fn health_check_handler(app_state: web::Data<AppState>) -> HttpResponse {
+pub async fn health_check_handler() -> HttpResponse {
+    let mut app_state = GLOBAL_APP_STATE.lock().unwrap().clone();
+
     let health_check_response = &app_state.health_check_response;
     let mut visit_count = app_state.visit_count.lock().unwrap();
 

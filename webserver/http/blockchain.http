@@ -8,3 +8,11 @@ Content-Type: application/json
 {
   "data": "some data"
 }
+
+### 向链中添加数据
+PUT http://127.0.0.1:3000/blockchain/broadcast
+Content-Type: application/json
+
+{
+  "data": "some data"
+}

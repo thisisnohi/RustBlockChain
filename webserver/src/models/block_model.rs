@@ -1,9 +1,9 @@
 use chrono::{DateTime, TimeZone, Utc};
-use serde::Serialize;
+use serde::{Deserialize, Serialize};
 use std::fmt;
 use std::fmt::{Display, Formatter};
 
-#[derive(Debug, Serialize)]
+#[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct Block {
     pub(crate) index: u32,
     pub(crate) hash: String,

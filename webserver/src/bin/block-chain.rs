@@ -2,6 +2,7 @@ use actix_cors::Cors;
 use actix_web::middleware::Logger;
 use actix_web::{http, web, App, HttpServer};
 use dotenv::dotenv;
+use lazy_static::lazy_static;
 use log::{debug, info, warn};
 use sqlx::postgres::PgPoolOptions;
 use std::convert::Into;
@@ -35,6 +36,19 @@ use crate::models::block_chain_model::BlockChain;
 use router::*;
 use state::AppState;
 
+/// lazy_static 宏创建一个全局可访问的app_state：
+lazy_static! {
+    static ref GLOBAL_APP_STATE: Mutex<web::Data<AppState>> = {
+        let app_state = web::Data::new(AppState {
+            health_check_response: "I'm OK".to_string(),
+            visit_count: Mutex::new(0),
+            block_chain: Mutex::from(load_block_chain().unwrap()),
+            node_list: Mutex::new(vec![]),
+        });
+        Mutex::new(app_state)
+    };
+}
+
 ///
 /// 运行`cargo run --bin teacher-service`
 /// 打印日志，需要添加环境变量： RUST_LOG=debug
@@ -59,14 +73,7 @@ async fn main() -> io::Result<()> {
     //     PgPoolOptions::new().connect(&database_url).await.unwrap();
 
     // 启用共享数据
-    let shared_data = web::Data::new(AppState {
-        health_check_response: "I'm OK".to_string(),
-        visit_count: Mutex::new(0),
-        // courses: Mutex::new(vec![]),
-        // db: db_pool,
-        block_chain: Mutex::from(load_block_chain().unwrap()),
-        node_list: Mutex::new(vec![]),
-    });
+    // let shared_data = web::Data::new(AppState {});
 
     let app = move || {
         // 加载日志
@@ -85,7 +92,8 @@ async fn main() -> io::Result<()> {
 
         App::new()
             .wrap(Logger::new(""))
-            .app_data(shared_data.clone())
+            // 使用 lazy_static 存储的全局数据，这里去除
+            //.app_data(shared_data.clone())
             // 添加路由支持
             // 1.通用路由： 健康检查
             // curl localhost:3000/health

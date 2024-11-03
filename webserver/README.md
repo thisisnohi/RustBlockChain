@@ -11,6 +11,8 @@
 * 新增区块：  `PUT` `/blockchain/`
 * 获取最新区块 `GET` `/blockchain/last-block`
 * 列出所有区块 `GET` `/blockchain/`
+* 广播所有节点(客户端)  `OPTION /blockchain/broadcast`
+* 接收其他节点广播的新增区块 `OPTION /blockchain/broadcast`
 
 ### 节点功能
 
@@ -18,8 +20,6 @@
 
 * 新增节点
 * 列出所有节点
-* 广播所有节点
-* 其他节点广播新增区块
 
 ## 测试
 
@@ -53,3 +53,11 @@
     "node": "http://127.0.0.1:4000"
   }
   ```
+
+## 问题与解决
+
+* 链及节点使用共享内存，可能导致并发问题
+    * 如：广播时，获取节点锁、块，循环节点进行广播。这里改成异步任务方式进行。
+      `block_chain_service.rs Line 108`
+* 异步任务出现，值移动问题。使用外部变更，在异步任务中进行值clone
+  `[block_chain_service.rs](src/handles/block_chain_service.rs)  Line 113 解决 broad_block 值移动问题`

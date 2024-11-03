@@ -1,6 +1,6 @@
 use actix_web::web;
 
-use crate::handles::block_chain_service::add_block_data;
+use crate::handles::block_chain_service::{add_block_data, broadcast_block_data};
 use crate::handles::node_service::{add_node, all_nodes};
 use crate::handles::{block_chain_service::get_all_blocks, general::health_check_handler};
 
@@ -17,7 +17,7 @@ pub fn block_chain_routes(cfg: &mut web::ServiceConfig) {
             .route("/last-block", web::get().to(get_all_blocks))
             // 添加新的块
             .route("/", web::put().to(add_block_data))
-            .route("/{data}", web::put().to(add_block_data)),
+            .route("/broadcast", web::post().to(broadcast_block_data)),
     );
 }
 
