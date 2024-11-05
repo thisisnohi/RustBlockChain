@@ -81,7 +81,7 @@ async fn main() -> io::Result<()> {
 
         // 支持跨域
         let cors = Cors::default()
-            .allowed_origin("http://localhost:8080;")
+            .allowed_origin("http://0.0.0.0:8080;")
             .allowed_origin_fn(|origin, _req_head| {
                 origin.as_bytes().starts_with(b"http://localhost")
             })
@@ -101,12 +101,12 @@ async fn main() -> io::Result<()> {
             // 2.业务路由
             .configure(block_chain_routes)
             .configure(node_routes)
-            .wrap(cors)
+        //.wrap(cors)
     };
     info!("===> 应用启动 ====");
     // 应用启动，指定端口为3000
     HttpServer::new(app)
-        .bind(format!("127.0.0.1:{}", server_port))?
+        .bind(format!("0.0.0.0:{}", server_port))?
         .run()
         .await
 }

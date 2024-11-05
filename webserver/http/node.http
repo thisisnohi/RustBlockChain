@@ -1,11 +1,11 @@
 ### 节点健康检查
-GET http://{{local}}/health
+GET http://{{server}}/health
 
 ### 获取所有节点
-GET http://{{local}}/nodes
+GET http://{{server}}/nodes
 
 ### 连接新的节点
-PUT http://{{local}}/nodes
+PUT http://{{server}}/nodes
 content-type: application/json
 
 {
