@@ -60,4 +60,4 @@
     * 如：广播时，获取节点锁、块，循环节点进行广播。这里改成异步任务方式进行。
       `block_chain_service.rs Line 108`
 * 异步任务出现，值移动问题。使用外部变更，在异步任务中进行值clone
-  `[block_chain_service.rs](src/handles/block_chain_service.rs)  Line 113 解决 broad_block 值移动问题`
+  `block_chain_service.rs  Line 113 解决 broad_block 值移动问题`
